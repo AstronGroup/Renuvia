@@ -1,0 +1,198 @@
+    .opt-detail {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        transition: max-height .4s cubic-bezier(.4, 0, .2, 1), opacity .3s ease, margin-top .4s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .opt.is-active .opt-detail {
+        max-height: 220px;
+        opacity: 1;
+        margin-top: 12px
+    }
+
+    .opt-detail li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 13px;
+        line-height: 1.35
+    }
+
+    .opt-detail svg {
+        flex: 0 0 auto;
+        width: 14px;
+        height: 14px;
+        margin-top: 1px;
+        fill: none;
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        stroke-linejoin: round
+    }
+
+    .opt-pros li {
+        color: var(--ink)
+    }
+
+    .opt-pros svg {
+        stroke: #2F8F5B
+    }
+
+    .opt-cons li {
+        color: var(--ink-2)
+    }
+
+    .opt-cons svg {
+        stroke: #C0392B
+    }
+
+    /* Gold "most popular" ribbon with sweeping shine */
+    .pop-ribbon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5em;
+        font-family: var(--mono);
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        text-align: center;
+        color: #3A2908;
+        padding: 6px 10px;
+        border-radius: 11px 11px 0 0;
+        background: linear-gradient(100deg, #A9781F 0%, #E7C878 42%, #F6E6B4 50%, #E7C878 58%, #A9781F 100%);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25), 0 1px 0 rgba(0, 0, 0, .12)
+    }
+
+    .pop-ribbon::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -60%;
+        width: 45%;
+        height: 100%;
+        transform: skewX(-18deg);
+        pointer-events: none;
+        background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, .85) 50%, transparent 100%);
+        animation: ribbon-shine 3.4s ease-in-out infinite
+    }
+
+    @keyframes ribbon-shine {
+        0% {
+            left: -60%
+        }
+
+        55%,
+        100% {
+            left: 130%
+        }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+        .opt-detail {
+            transition: opacity .2s ease
+        }
+
+        .pop-ribbon::after {
+            display: none
+        }
+    }
+
+    /* --- Mobile header & spacing polish --- */
+    @media (max-width:600px) {
+        .nav {
+            gap: 12px;
+            height: 64px
+        }
+
+        .brand {
+            gap: 9px;
+            min-width: 0
+        }
+
+        .brand b {
+            font-size: 15px;
+            white-space: nowrap
+        }
+
+        .nav-cta {
+            gap: 12px
+        }
+
+        .nav-cta .cart {
+            white-space: nowrap;
+            font-size: 12px
+        }
+
+        .nav-cta .btn {
+            padding: 10px 18px !important;
+            font-size: 14px
+        }
+
+        .announce {
+            font-size: 10.5px;
+            letter-spacing: .08em;
+            padding: 8px 14px;
+            line-height: 1.45
+        }
+
+        .price-row {
+            flex-wrap: wrap;
+            row-gap: 2px
+        }
+
+        .price-row small {
+            flex-basis: 100%
+        }
+
+        .wrap {
+            padding: 0 18px
+        }
+
+        .buybox {
+            padding: 16px
+        }
+
+        .opt {
+            padding: 13px 13px;
+            gap: 11px
+        }
+
+        .opt-end {
+            gap: 6px
+        }
+
+        .opt-detail li {
+            font-size: 12.5px
+        }
+
+        .opt .p b {
+            font-size: 18px
+        }
+    }
+
+    @media (max-width:360px) {
+        .brand b {
+            font-size: 14px
+        }
+
+        .nav-cta .cart {
+            display: none
+        }
+
+        .nav-cta .btn {
+            padding: 9px 15px !important
+        }
+    }

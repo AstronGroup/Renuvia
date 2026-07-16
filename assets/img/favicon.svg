@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" fill="#2C3A24"/>
+  <g fill="none" stroke="#C6A971" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- center petal -->
+    <path d="M96,134 C84,108 84,72 96,46 C108,72 108,108 96,134 Z"/>
+    <!-- inner side petals -->
+    <path d="M96,134 C84,108 84,72 96,46 C108,72 108,108 96,134 Z" transform="rotate(24 96 134)"/>
+    <path d="M96,134 C84,108 84,72 96,46 C108,72 108,108 96,134 Z" transform="rotate(-24 96 134)"/>
+    <!-- outer side petals (shorter) -->
+    <path d="M96,134 C88,116 88,92 96,74 C104,92 104,116 96,134 Z" transform="rotate(52 96 134)"/>
+    <path d="M96,134 C88,116 88,92 96,74 C104,92 104,116 96,134 Z" transform="rotate(-52 96 134)"/>
+    <!-- base leaves -->
+    <path d="M96,136 C86,128 86,116 92,108 C100,114 100,128 96,136 Z" transform="rotate(74 96 136)"/>
+    <path d="M96,136 C86,128 86,116 92,108 C100,114 100,128 96,136 Z" transform="rotate(-74 96 136)"/>
+  </g>
+</svg>
