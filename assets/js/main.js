@@ -10,10 +10,31 @@ document.querySelectorAll('.rev-help').forEach(function(b){
 
 // buy-box option toggle + point the checkout link at the selected plan
   var addBtn = document.getElementById('add-to-cart');
+
+  // Captura o afid da URL (ex.: ?afid=hRL9seBssW) e o mantém durante toda a
+  // sessão. Assim, mesmo que o usuário navegue pelo site, o afid nunca some.
+  function getAfid(){
+    try {
+      var v = new URLSearchParams(window.location.search).get('afid');
+      if (v && v.trim() !== '') { sessionStorage.setItem('afid', v.trim()); return v.trim(); }
+      return sessionStorage.getItem('afid') || '';
+    } catch(e){ return ''; }
+  }
+
+  // Força o afid a ser anexado no link de checkout (a Cartpanda lê como tag de
+  // afiliado). Usa "&" para seguir o mesmo padrão dos links já existentes.
+  function withAfid(url){
+    if(!url) return url;
+    var afid = getAfid();
+    if(!afid) return url;
+    if(/[?&]afid=/.test(url)) return url; // já tem afid, não duplica
+    return url + '&afid=' + encodeURIComponent(afid);
+  }
+
   function selectOpt(o){
     document.querySelectorAll('[data-opt]').forEach(function(x){x.classList.remove('is-active')});
     o.classList.add('is-active');
-    if(addBtn && o.dataset.checkout){ addBtn.setAttribute('href', o.dataset.checkout); }
+    if(addBtn && o.dataset.checkout){ addBtn.setAttribute('href', withAfid(o.dataset.checkout)); }
   }
   document.querySelectorAll('[data-opt]').forEach(function(o){
     o.addEventListener('click',function(){ selectOpt(o); });
