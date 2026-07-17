@@ -1,0 +1,373 @@
+/* ==========================================================================
+   LAYOUT — banner, card do hero, seções e imagem flutuante
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Banner (hero de topo)
+   O padding-bottom generoso abre espaço para o card .s1bx, que sobe por cima
+   dele com margin-top negativa.
+   -------------------------------------------------------------------------- */
+.banner {
+  padding: 30px 0 306px;
+  background:
+    linear-gradient(rgba(16, 65, 107, .62), rgba(13, 45, 74, .86)),
+    url(../images/banner.jpg) center top / cover no-repeat;
+}
+
+.bnrhding {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -.015em;
+  font-size: 54px;
+  line-height: 66px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+  text-wrap: balance;
+}
+
+/* destaque amarelo nas duas frases-chave do hero */
+.bnrhding span,
+.bnrsub span {
+  color: #fff000;
+}
+
+.bnrsub {
+  margin: 18px auto 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 34px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+}
+
+/* prova social logo abaixo da subheadline */
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 18px auto 0;
+  font-size: 15px;
+  color: #fff;
+}
+
+.hero-trust strong {
+  font-weight: 800;
+}
+
+.ht-stars {
+  color: #f5c451;
+  letter-spacing: 1px;
+}
+
+.ht-dot {
+  opacity: .55;
+}
+
+@media (max-width: 1000px) {
+  .bnrhding {
+    font-size: 46px;
+    line-height: 58px;
+  }
+}
+
+@media (max-width: 767px) {
+  .banner {
+    padding: 20px 0 206px;
+  }
+
+  .bnrhding {
+    font-size: 30px;
+    line-height: 1.15;
+  }
+
+  .bnrsub {
+    margin-top: 14px;
+    padding: 0 6px;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .hero-trust {
+    gap: 5px 8px;
+    font-size: 13px;
+  }
+
+  .hero-trust .ht-dot {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Card do hero (.s1bx) — sobrepõe o banner
+   -------------------------------------------------------------------------- */
+.s1bx {
+  margin: -284px 0 0;
+  padding: 4px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 10px #dcd9d9;
+}
+
+.s1bximg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.s1bxbtm {
+  padding: 17px 20px;
+  background: #f6efe3;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 14px 14px;
+}
+
+.s1bxbtm p {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 30px;
+  color: var(--ink);
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .s1bximg {
+    width: auto;
+    height: auto;
+  }
+
+  .s1bxbtm {
+    padding: 15px 10px;
+  }
+
+  .s1bxbtm p {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 767px) {
+  .s1bx {
+    width: 450px;
+    margin: -184px auto 0;
+  }
+
+  .s1bxbtm p {
+    font-size: 17px;
+    line-height: 25px;
+  }
+}
+
+@media (max-width: 479px) {
+  .s1bx {
+    width: 100%;
+  }
+
+  .s1bxbtm {
+    padding: 12px 9px;
+  }
+
+  .s1bxbtm p {
+    font-size: 16px;
+    line-height: 23px;
+  }
+}
+
+@media (max-width: 389px) {
+  .s1bxbtm p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Seções
+   -------------------------------------------------------------------------- */
+.sec1 {
+  padding: 1px 0 124px;
+}
+
+.sec2,
+.sec7 {
+  padding: 1px 0 40px;
+}
+
+.sec3,
+.sec4,
+.sec5 {
+  padding: 40px 0;
+}
+
+.sec6 {
+  padding: 40px 0 60px;
+}
+
+.flt.kg-sec {
+  padding: 46px 0;
+}
+
+@media (min-width: 768px) {
+  .sec3,
+  .sec4,
+  .sec5,
+  .flt.kg-sec {
+    padding: 52px 0;
+  }
+
+  .sec6 {
+    padding: 52px 0 60px;
+  }
+
+  .sec7 {
+    padding: 1px 0 52px;
+  }
+
+  /* remove a folga dupla no topo destas seções (margem do 1º filho + padding) */
+  .sec5 > .container.bdinpad > :first-child,
+  .sec6 > .container.bdinpad > :first-child {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .sec1 {
+    padding: 1px 0 118px;
+  }
+
+  .sec2,
+  .sec7 {
+    padding: 1px 0 30px;
+  }
+
+  .sec3,
+  .sec4,
+  .sec5 {
+    padding: 30px 0;
+  }
+
+  .flt.kg-sec {
+    padding: 34px 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Blocos herdados do template ainda em uso
+   -------------------------------------------------------------------------- */
+
+/* caixa rosa de destaque (abre a sec2, sobrepondo a sec1) */
+.s2bx {
+  margin: -80px 0 0;
+  padding: 22px 26px;
+  background: #fff0f0;
+  border: 2px solid #f6a7ab;
+  border-radius: 16px;
+  font-weight: 600;
+}
+
+/* lista com marcador em imagem */
+.s2bx3list {
+  padding: 14px 0 0;
+}
+
+.s2bx3list li {
+  margin: 30px 0 0;
+  padding: 0 0 0 52px;
+  font-weight: 500;
+  background: url(../images/bullet1.png) left 2px no-repeat;
+}
+
+.s7bx1list {
+  padding: 5px 0 0 38px;
+}
+
+.s7bx1list li {
+  margin: 29px 0 0;
+  padding: 0 0 0 46px;
+  font-weight: 500;
+  background: url(../images/bullet2.png) left 5px no-repeat;
+}
+
+/* caixa creme de destaque */
+.s9bx3 {
+  margin: 40px 0 0;
+  padding: 26px;
+  background: #f6efe3;
+  border: 1.5px solid var(--navy);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 1000px) {
+  .s2bx {
+    padding: 20px;
+  }
+
+  .s2bx3list li {
+    margin: 22px 0 0;
+    padding: 0 0 0 40px;
+    background: url(../images/bullet1.png) left 3px / 26px no-repeat;
+  }
+
+  .s7bx1list {
+    padding: 5px 0 0 18px;
+  }
+
+  .s7bx1list li {
+    margin: 24px 0 0;
+    padding: 0 0 0 40px;
+    background-size: 26px;
+  }
+
+  .s9bx3 {
+    margin-top: 37px;
+  }
+}
+
+@media (max-width: 767px) {
+  .s2bx {
+    padding: 18px 10px;
+  }
+
+  .s2bx3list {
+    padding: 8px 0 0;
+  }
+
+  .s2bx3list li {
+    margin: 15px 0 0;
+    padding: 0 0 0 32px;
+    background-size: 22px;
+  }
+
+  .s7bx1list {
+    padding: 8px 0 0 10px;
+  }
+
+  .s7bx1list li {
+    margin: 15px 0 0;
+    padding: 0 0 0 34px;
+    background-size: 20px;
+  }
+
+  .s9bx3 {
+    margin-top: 34px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Bloco de ícones no meio do texto
+   Antes flutuava à direita: numa coluna de 720px, uma imagem de 428px deixava
+   ~270px de texto ao lado — ilegível. Agora é um bloco centralizado, e o
+   texto mantém a linha inteira.
+   -------------------------------------------------------------------------- */
+.float-image__img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 24px auto;
+}

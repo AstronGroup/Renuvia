@@ -1,0 +1,1016 @@
+/* ==========================================================================
+   COMPONENTS — blocos editoriais do advertorial
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Imagens de conteúdo
+
+   São três tipos, e tratá-los igual é o que criava moldura dupla:
+
+   a) padrão — foto sangrada (a imagem vai até a borda): ganha canto
+      arredondado + sombra, virando um objeto sobre a página.
+   b) .img-cutout — PNG recortado em fundo transparente: qualquer moldura
+      desenharia um retângulo em volta de um recorte. Nada.
+   c) .img-diagram — diagrama com fundo branco/creme chapado: moldurar vira
+      "cartão branco". O multiply funde o fundo na cor da página e só o
+      traço permanece.
+   -------------------------------------------------------------------------- */
+.center-img,
+.cr-progerin-diagram {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 24px auto;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.trust-badges-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 22px auto;
+}
+
+img.img-cutout,
+img.img-diagram {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+img.img-diagram,
+.trust-badges-img {
+  mix-blend-mode: multiply;
+}
+
+/* --------------------------------------------------------------------------
+   2. Bloco de texto + imagem (lado a lado)
+
+   A imagem é de apoio, não protagonista: 34% da coluna (~245px). Ela já
+   ocupou 42% e o texto ficava com ~390px, uma tira de ~36 caracteres por
+   linha. Com 34% sobram ~445px, que é o que estes blocos curtos precisam.
+   Imagens que merecem largura cheia usam .center-img / .cr-progerin-diagram.
+   --rev alterna o lado da imagem e cria o ritmo da página.
+   align-items:center — com flex-start a imagem gruda no topo e abre um vazio
+   embaixo dela sempre que o texto é mais alto.
+   -------------------------------------------------------------------------- */
+.two-col-media {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 34px;
+}
+
+.two-col-media--rev {
+  flex-direction: row-reverse;
+}
+
+.two-col-media__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.two-col-media__img {
+  flex: 0 0 34%;
+  max-width: 260px;
+}
+
+/* diagramas com rótulos internos: 260px não deixa o texto legível */
+.two-col-media__img--wide {
+  flex: 0 0 44%;
+  max-width: 380px;
+}
+
+/* 245px é menor que a menor imagem do conjunto (409px), então nenhuma é
+   esticada — todas reduzem, e todas terminam na mesma largura. */
+.two-col-media__img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.two-col-media__img img.img-cutout,
+.two-col-media__img img.img-diagram {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* No mobile não há largura para duas colunas: empilha, imagem sempre antes
+   do texto (independente de --rev), centralizada. */
+@media (max-width: 767px) {
+  .two-col-media,
+  .two-col-media--rev {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .two-col-media__img {
+    flex: none;
+    order: -1;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .two-col-media__img--wide {
+    max-width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Rótulos e ênfases tipográficas
+   -------------------------------------------------------------------------- */
+.fail-label {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--navy);
+}
+
+.sub-h {
+  margin: 34px 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--navy);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.pullquote {
+  margin: 26px auto;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 38px;
+  color: var(--navy);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.emph-line {
+  margin: 28px auto 0;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 34px;
+  color: var(--navy);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.cta-line {
+  margin: 26px auto 0;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 31px;
+  color: var(--navy);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.center-note {
+  margin: 14px auto 0;
+  text-align: center;
+}
+
+.reveal {
+  margin-top: 6px;
+  text-align: center;
+}
+
+.prod-hero {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  margin: 16px auto 6px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 767px) {
+  .fail-label {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .sub-h {
+    font-size: 23px;
+    line-height: 1.25;
+  }
+
+  .pullquote,
+  .emph-line {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+
+  .cta-line {
+    font-size: 19px;
+    line-height: 26px;
+  }
+
+  .prod-hero {
+    max-width: 220px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Caixas de destaque
+   -------------------------------------------------------------------------- */
+.redbox {
+  margin: 36px 0 0;
+  padding: 22px 26px;
+  background: #fff0f0;
+  border: 2px solid #f6a7ab;
+  border-radius: 18px;
+  font-weight: 600;
+}
+
+.redbox p {
+  margin: 0;
+}
+
+.bluebox {
+  margin: 26px 0 0;
+  padding: 24px 30px;
+  background: var(--navy);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.bluebox p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #fff;
+}
+
+.band-heading {
+  margin: 40px 0 0;
+  padding: 22px 24px;
+  background: var(--navy);
+  border-radius: 14px;
+  color: #fff;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .redbox {
+    margin-top: 28px;
+    padding: 18px 16px;
+  }
+
+  .bluebox {
+    padding: 20px 18px;
+  }
+
+  .bluebox p {
+    font-size: 19px;
+    line-height: 27px;
+  }
+
+  .band-heading {
+    padding: 18px 16px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Listas
+   -------------------------------------------------------------------------- */
+
+/* lista com marcador circular */
+.kit-list {
+  margin: 14px 0 0;
+}
+
+.kit-list li {
+  position: relative;
+  margin: 10px 0 0;
+  padding: 0 0 0 24px;
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.kit-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--navy);
+}
+
+.bluebox .kit-list {
+  margin: 0;
+}
+
+.bluebox .kit-list li {
+  color: #fff;
+}
+
+.bluebox .kit-list li:first-child {
+  margin-top: 0;
+}
+
+.bluebox .kit-list li::before {
+  background: #fff;
+}
+
+/* lista sim/não */
+.nono-list {
+  margin: 18px 0 0;
+}
+
+.nono-list li {
+  position: relative;
+  margin: 12px 0 0;
+  padding: 0 0 0 40px;
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+}
+
+.nono-list li::before {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.nono-list li.no::before {
+  content: "\2717";
+  color: #e11d2a;
+}
+
+.nono-list li.yes::before {
+  content: "\2713";
+  color: #16a34a;
+}
+
+/* lista com check */
+.check-list {
+  margin: 16px 0 0;
+}
+
+.check-list li {
+  position: relative;
+  margin: 14px 0 0;
+  padding: 0 0 0 34px;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.check-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+@media (max-width: 767px) {
+  .kit-list li {
+    font-size: 19px;
+    line-height: 27px;
+    padding-left: 20px;
+  }
+
+  .kit-list li::before {
+    top: 9px;
+    width: 8px;
+    height: 8px;
+  }
+
+  .nono-list li {
+    font-size: 19px;
+    line-height: 27px;
+    padding-left: 34px;
+  }
+
+  .check-list li {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Blocos numerados
+   -------------------------------------------------------------------------- */
+.reason {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.reason-num {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--navy);
+  font-weight: 700;
+  font-size: 28px;
+  color: #fff;
+}
+
+.reason-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* card navy com imagem lateral */
+.kitbox {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 26px 0 0;
+  padding: 30px 32px;
+  background: var(--navy);
+  border-radius: 18px;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.kitbox__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.kitbox__img {
+  flex: 0 0 32%;
+  max-width: 270px;
+}
+
+.kitbox__img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.kitbox__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 12px;
+}
+
+.kitbox__num {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--navy);
+}
+
+.kitbox__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 32px;
+  color: #fff;
+}
+
+.kitbox p,
+.kitbox .kit-list li {
+  color: #fff;
+}
+
+.kitbox .kit-list li::before {
+  background: #fff;
+}
+
+@media (max-width: 767px) {
+  .reason {
+    gap: 12px;
+    margin-top: 26px;
+  }
+
+  .reason-num {
+    width: 44px;
+    height: 44px;
+    font-size: 23px;
+  }
+
+  .kitbox {
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 18px;
+  }
+
+  .kitbox__img {
+    flex: none;
+    order: -1;
+    max-width: 230px;
+    margin: 0 auto;
+  }
+
+  .kitbox__num {
+    width: 38px;
+    height: 38px;
+    font-size: 21px;
+  }
+
+  .kitbox__title {
+    font-size: 21px;
+    line-height: 27px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. Cards (objeções, escolhas, depoimentos)
+   -------------------------------------------------------------------------- */
+.obj-card,
+.choice-card,
+.cr-testimonial {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.obj-card {
+  margin: 18px 0 0;
+  padding: 22px 26px;
+}
+
+.obj-q {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 31px;
+  color: var(--navy);
+}
+
+.obj-meta {
+  margin: 6px 0 14px;
+  font-size: 15px;
+  color: #4b5563;
+}
+
+.obj-meta .stars {
+  margin-right: 4px;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--gold-2);
+}
+
+.obj-card .ans {
+  margin: 0 0 10px;
+}
+
+.obj-card .ans:last-child {
+  margin-bottom: 0;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 22px 0 0;
+}
+
+.choice-card {
+  padding: 20px 24px;
+}
+
+.choice-card--good {
+  background: #f6efe3;
+  border: 1.5px solid var(--navy);
+  box-shadow: var(--shadow);
+}
+
+.choice-tag {
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.choice-card--good .choice-tag {
+  color: var(--gold);
+}
+
+.choice-card .ctext {
+  margin: 0;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.cr-testimonials {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.cr-testimonial {
+  padding: 22px 24px;
+}
+
+.cr-testimonial-stars {
+  margin: 0 0 6px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--gold-2);
+}
+
+.cr-testimonial-title {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.cr-testimonial-body {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.cr-testimonial-author {
+  margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .obj-card,
+  .choice-card,
+  .cr-testimonial {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .obj-q {
+    font-size: 19px;
+    line-height: 1.3;
+  }
+
+  .choice-card .ctext {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .cr-testimonial-title {
+    font-size: 18px;
+  }
+
+  .cr-testimonial-body {
+    font-size: 16px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Citações
+   -------------------------------------------------------------------------- */
+.quote-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* raio pequeno do lado da barra: com 14px a borda de 5px vira uma cunha
+   curva no canto em vez de uma barra reta */
+.quote-item {
+  padding: 16px 20px;
+  background: #f4f8fc;
+  border-left: 5px solid var(--navy);
+  border-radius: 3px 14px 14px 3px;
+}
+
+.quote-item .quote-q {
+  margin: 0;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 28px;
+  color: #1f2937;
+}
+
+.quote-item .quote-a {
+  margin: 8px 0 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy);
+}
+
+@media (max-width: 767px) {
+  .quote-item {
+    padding: 14px 16px;
+  }
+
+  .quote-item .quote-q {
+    font-size: 17px;
+    line-height: 25px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Linha do tempo
+   -------------------------------------------------------------------------- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0 0;
+}
+
+.tl-item {
+  display: flex;
+  gap: 22px;
+  padding: 18px 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.tl-item:last-child {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tl-when {
+  flex: 0 0 130px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.tl-what {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@media (max-width: 767px) {
+  .tl-item {
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 0;
+  }
+
+  .tl-when {
+    flex: none;
+    font-size: 18px;
+  }
+
+  .tl-what {
+    font-size: 17px;
+    line-height: 25px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. Botão de CTA
+   -------------------------------------------------------------------------- */
+.cta-btn-wrap {
+  margin: 26px 0;
+  text-align: center;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 18px 46px;
+  background: var(--green);
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, .3);
+  transition: background .15s, transform .12s, box-shadow .15s;
+}
+
+.cta-btn:hover {
+  background: var(--green-dark);
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(19, 128, 51, .3);
+}
+
+@media (hover: hover) {
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(19, 128, 51, .4);
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-btn {
+    padding: 16px 32px;
+    font-size: 19px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. Garantia
+   -------------------------------------------------------------------------- */
+.guarantee {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin: 30px 0;
+  padding: 30px;
+  background: #f6efe3;
+  border: 1.5px solid var(--navy);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.g-seal {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(16, 65, 107, .3);
+}
+
+.g-seal .g1 {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.g-seal .g2 {
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.g-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: 767px) {
+  .guarantee {
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 18px;
+    text-align: center;
+  }
+
+  .g-seal {
+    width: 120px;
+    height: 120px;
+  }
+
+  .g-seal .g1 {
+    font-size: 28px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. FAQ (acordeão)
+   -------------------------------------------------------------------------- */
+.faq-acc {
+  margin: 16px 0 0;
+  border: 1.5px solid var(--navy);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--navy);
+  outline: 0;
+}
+
+.faq-q .ic {
+  flex: 0 0 auto;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.faq-q:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: -3px;
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .45s ease;
+}
+
+.faq-a .inner {
+  padding: 0 24px 22px;
+  font-size: 19px;
+  line-height: 27px;
+}
+
+@media (max-width: 767px) {
+  .faq-q {
+    padding: 16px 18px;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  .faq-a .inner {
+    padding: 0 18px 18px;
+    font-size: 17px;
+    line-height: 25px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Animação de entrada (revelar ao rolar)
+   A classe .fx-reveal vem no HTML; .js é adicionada pelo script inline no
+   <head>, então sem JavaScript o conteúdo permanece visível.
+   -------------------------------------------------------------------------- */
+.js .fx-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity .7s cubic-bezier(.16, 1, .3, 1),
+    transform .7s cubic-bezier(.16, 1, .3, 1);
+}
+
+.js .fx-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   14. Movimento reduzido — fonte única de verdade
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+
+  .js .fx-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js .sticky-cta {
+    transform: none;
+  }
+
+  .plan:hover,
+  .plan:active,
+  .cta-btn:hover,
+  .cta-btn:active {
+    transform: none;
+  }
+}
