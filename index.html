@@ -52,19 +52,29 @@
       display: none
     }
   </style>
-  <!-- Cartpanda secure-order badge: só carrega quando NÃO houver afid.
-       Na página normal aparece igual; na página com afid não é injetado. -->
+  <!-- Cartpanda: SEMPRE carregado. Ele reescreve os links de checkout com o
+       afid/subscription (essencial pro afiliado) além de desenhar a badge. -->
+  <script type="text/javascript" src="https://assets.mycartpanda.com/cartx-ecomm-ui-assets/js/cpsales.js"></script>
+  <!-- Quando houver afid, marca o <html> para esconder só a badge feia da
+       Cartpanda por CSS. O afid nos links continua funcionando normalmente. -->
   <script type="text/javascript">
     (function () {
       var afid = new URLSearchParams(window.location.search).get("afid");
-      var hasAfid = !!(afid && afid.trim() !== "");
-      if (hasAfid) return;
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.src = "https://assets.mycartpanda.com/cartx-ecomm-ui-assets/js/cpsales.js";
-      document.head.appendChild(s);
+      if (afid && afid.trim() !== "") {
+        document.documentElement.classList.add("has-afid");
+      }
     })();
   </script>
+  <style>
+    html.has-afid [id^="cpd-"],
+    html.has-afid .cpd-container,
+    html.has-afid .cpd-badge,
+    html.has-afid .cpd-sticky,
+    html.has-afid #cp-de-legal-links,
+    html.has-afid #cp-advertising-disclaimer {
+      display: none !important;
+    }
+  </style>
   <!-- UTMIFY-->
   <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids
     data-utmify-ignore-iframe data-utmify-is-cartpanda async defer></script>
